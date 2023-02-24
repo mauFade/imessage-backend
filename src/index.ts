@@ -6,6 +6,7 @@ import {
 import express from "express";
 import http from "http";
 import { typeDefs } from "./graphql/typeDefs";
+import { resolvers } from "./graphql/resolvers";
 import { DocumentNode } from "graphql";
 
 async function main(typeDefs: DocumentNode[], resolvers) {
@@ -34,4 +35,4 @@ async function main(typeDefs: DocumentNode[], resolvers) {
   console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`);
 }
 
-main(typeDefs).catch((err) => console.log(err));
+main(typeDefs, resolvers).catch((err) => console.log(err));
