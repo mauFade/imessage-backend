@@ -33,7 +33,7 @@ async function main() {
   await server.start();
   server.applyMiddleware({
     app,
-    path: "/",
+    path: "/graphql",
   });
 
   await new Promise<void>((resolve) =>
