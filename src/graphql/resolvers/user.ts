@@ -5,5 +5,5 @@ export const userResolver = {
   Query: {
     searchUsers: () => {},
   },
-  Subscription: {},
+  // Subscription: {},
 };

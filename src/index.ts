@@ -3,18 +3,25 @@ import {
   ApolloServerPluginDrainHttpServer,
   ApolloServerPluginLandingPageLocalDefault,
 } from "apollo-server-core";
+import { makeExecutableSchema } from "@graphql-tools/schema";
+
 import express from "express";
 import http from "http";
+
 import { typeDefs } from "./graphql/typeDefs";
 import { resolvers } from "./graphql/resolvers";
-import { DocumentNode } from "graphql";
 
-async function main(typeDefs: DocumentNode[], resolvers) {
+async function main() {
   const app = express();
   const httpServer = http.createServer(app);
-  const server = new ApolloServer({
+
+  const schema = makeExecutableSchema({
     typeDefs,
     resolvers,
+  });
+
+  const server = new ApolloServer({
+    schema,
     csrfPrevention: true,
     cache: "bounded",
     plugins: [
@@ -35,4 +42,4 @@ async function main(typeDefs: DocumentNode[], resolvers) {
   console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`);
 }
 
-main(typeDefs, resolvers).catch((err) => console.log(err));
+main().catch((err) => console.log(err));
