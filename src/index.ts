@@ -11,6 +11,7 @@ import * as dotenv from "dotenv";
 
 import { typeDefs } from "./graphql/typeDefs";
 import { resolvers } from "./graphql/resolvers";
+import { corsConfig } from "./configs/cors";
 
 async function main() {
   dotenv.config();
@@ -22,11 +23,6 @@ async function main() {
     typeDefs,
     resolvers,
   });
-
-  const corsConfig = {
-    origin: process.env.APP_URL,
-    credentials: true,
-  };
 
   const server = new ApolloServer({
     schema,
